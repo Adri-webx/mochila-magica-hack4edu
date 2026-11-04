@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "Mochila Mágica",
+  "short_name": "Mochila Mágica",
+  "description": "Aprende sin conexión: Matemáticas, Español, Historia, Ciencias y Arte para primaria (1º a 6º).",
+  "lang": "es-MX",
+  "dir": "ltr",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FEFAE0",
+  "theme_color": "#58CC02",
+  "categories": ["education", "kids"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
