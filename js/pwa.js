@@ -10,10 +10,11 @@
   // ---- Estilos de los avisos
   var css = document.createElement('style');
   css.textContent =
-    '.mm-bar{position:fixed;left:12px;right:12px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:9999;' +
+    '.mm-bar{position:fixed;left:12px;right:12px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:9999;' +
     'max-width:520px;margin:0 auto;background:#fff;border:3px solid #E5E5E5;border-radius:20px;padding:10px 12px;' +
     'box-shadow:0 8px 32px rgba(0,0,0,.18);display:flex;align-items:center;gap:10px;font:700 13px/1.3 Nunito,system-ui,sans-serif;color:#111}' +
     '.mm-bar span{flex:1}.mm-bar button{border:0;border-radius:14px;padding:9px 14px;font:800 13px Nunito,system-ui,sans-serif;cursor:pointer}' +
+    '@media (min-width:1024px){.mm-bar{bottom:24px}}' +
     '.mm-ok{background:#58CC02;color:#fff}.mm-no{background:#F5F5F5;color:#777}';
   document.head.appendChild(css);
 
@@ -48,6 +49,18 @@
       { label: 'Ahora no', cls: 'mm-no', fn: function () { sessionStorage.setItem('mm_install_dismissed', '1'); } }
     ]);
   });
+
+  // Botón "Instalar la app" del Perfil
+  window.mmInstall = function () {
+    if (isStandalone) return 'instalada';
+    if (deferredPrompt) {
+      var b = document.querySelector('.mm-bar'); if (b) b.remove();
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.finally(function () { deferredPrompt = null; });
+      return 'ok';
+    }
+    return isIOS ? 'ios' : 'no';
+  };
 
   window.addEventListener('appinstalled', function () {
     var b = document.querySelector('.mm-bar'); if (b) b.remove();
@@ -89,8 +102,8 @@
     speakBtn.type = 'button';
     speakBtn.setAttribute('aria-label', 'Escuchar la pregunta');
     speakBtn.textContent = '🔊';
-    speakBtn.style.cssText = 'position:fixed;right:14px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:9997;width:54px;height:54px;' +
-      'border-radius:50%;border:3px solid #E5E5E5;background:#fff;font-size:26px;box-shadow:0 6px 20px rgba(0,0,0,.18);cursor:pointer;display:none';
+    speakBtn.style.cssText = 'position:fixed;right:max(12px, env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:9997;width:46px;height:46px;' +
+      'border-radius:50%;border:3px solid #E5E5E5;background:#fff;font-size:22px;line-height:1;padding:0;box-shadow:0 6px 20px rgba(0,0,0,.18);cursor:pointer;display:none';
     document.body.appendChild(speakBtn);
 
     var voice = null;
