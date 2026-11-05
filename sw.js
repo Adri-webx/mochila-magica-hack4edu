@@ -1,6 +1,6 @@
 // Mochila Mágica – Service Worker (offline first)
 // Sube el número de versión cada vez que cambies archivos de la app.
-const VERSION = 'v3';
+const VERSION = 'v7';
 const CACHE_APP = `mochila-app-${VERSION}`;
 const CACHE_FONTS = 'mochila-fonts-v1';
 
